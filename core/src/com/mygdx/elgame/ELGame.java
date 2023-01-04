@@ -14,13 +14,15 @@ public class ELGame extends ApplicationAdapter {
 	Paddle paddle = new Paddle(120);
 	Random r = new Random();
 
+	
+
 	@Override
 	public void create() {
 		shape = new ShapeRenderer();
-		for (int i = 0; i < 1; i++) {
-			balls.add(new Ball(400,
-					300,
-					40, 0, 0));
+		for (int i = 0; i < 10; i++) {
+			balls.add(new Ball(r.nextInt(70),
+					r.nextInt(70),
+					40, 12, 3));
 		}
 	}
 
@@ -40,22 +42,27 @@ public class ELGame extends ApplicationAdapter {
 	}
 
 	public void checkCollision(Paddle paddle, Ball ball) {
-        if(collidesWith(paddle, ball)){
-            ball.color = Color.GREEN;
-        }
-        else{
-            ball.color = Color.WHITE;
-        }
-    }
+		if (collidesWith(paddle, ball)) {
+			if (!ball.getCollision()) {
+				ball.setColor(Color.GREEN);
+				ball.setXSpeed(-ball.getXSpeed());
+				ball.setYSpeed(-ball.getYSpeed());
+				ball.setCollision(true);
+			}
+		} else {
+			ball.setColor(Color.WHITE);
+			ball.setCollision(false);
+		}
+	}
 
-    private boolean collidesWith(Paddle paddle, Ball ball) {
+	private boolean collidesWith(Paddle paddle, Ball ball) {
 
-		boolean a = ball.x + ball.radius >= paddle.x;
-		boolean b = ball.x - ball.radius <= paddle.x + paddle.width;
-		boolean c = ball.y + ball.radius >= paddle.y;
-		boolean d = ball.y - ball.radius <= paddle.y + paddle.height;
+		boolean a = ball.getX() + ball.getRadius() >= paddle.getX();
+		boolean b = ball.getX() - ball.getRadius() <= paddle.getX() + paddle.getWidth();
+		boolean c = ball.getY() + ball.getRadius() >= paddle.getY();
+		boolean d = ball.getY() - ball.getRadius() <= paddle.getY() + paddle.getHeight();
 
 		return a && b && c && d;
 
-    }
+	}
 }

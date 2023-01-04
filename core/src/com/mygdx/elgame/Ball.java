@@ -5,12 +5,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Ball {
-    int x;
-    int y;
-    int radius;
-    int xSpeed;
-    int ySpeed;
-    Color color = Color.WHITE;
+    private int x;
+    private int y;
+    private int radius;
+    private int xSpeed;
+    private int ySpeed;
+    private Color color = Color.WHITE;
+    boolean collision = false;
 
     public Ball(int x, int y, int size, int xSpeed, int ySpeed) {
         this.x = x;
@@ -60,19 +61,19 @@ public class Ball {
         this.radius = radius;
     }
 
-    public int getxSpeed() {
+    public int getXSpeed() {
         return xSpeed;
     }
 
-    public void setxSpeed(int xSpeed) {
+    public void setXSpeed(int xSpeed) {
         this.xSpeed = xSpeed;
     }
 
-    public int getySpeed() {
+    public int getYSpeed() {
         return ySpeed;
     }
 
-    public void setySpeed(int ySpeed) {
+    public void setYSpeed(int ySpeed) {
         this.ySpeed = ySpeed;
     }
 
@@ -82,5 +83,13 @@ public class Ball {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public Boolean getCollision() {
+        return collision;
+    }
+
+    public void setCollision(boolean b) {
+        this.collision = b;
     }
 }
