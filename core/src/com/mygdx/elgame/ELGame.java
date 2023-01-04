@@ -19,10 +19,10 @@ public class ELGame extends ApplicationAdapter {
 	@Override
 	public void create() {
 		shape = new ShapeRenderer();
-		for (int i = 0; i < 10; i++) {
-			balls.add(new Ball(r.nextInt(70),
-					r.nextInt(70),
-					40, 12, 3));
+		for (int i = 0; i < 1; i++) {
+			balls.add(new Ball(50,
+					50,
+					40, 5, 5));
 		}
 	}
 
@@ -43,14 +43,11 @@ public class ELGame extends ApplicationAdapter {
 
 	public void checkCollision(Paddle paddle, Ball ball) {
 		if (collidesWith(paddle, ball)) {
-			if (!ball.getCollision()) {
-				ball.setColor(Color.GREEN);
-				ball.setXSpeed(-ball.getXSpeed());
+			if (Boolean.FALSE.equals(ball.getCollision())) {
 				ball.setYSpeed(-ball.getYSpeed());
 				ball.setCollision(true);
 			}
 		} else {
-			ball.setColor(Color.WHITE);
 			ball.setCollision(false);
 		}
 	}
