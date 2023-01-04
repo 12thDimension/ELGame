@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -30,10 +31,31 @@ public class ELGame extends ApplicationAdapter {
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 
 		for (Ball ball : balls) {
+			checkCollision(paddle, ball);
 			ball.update();
 			ball.draw(shape);
 		}
 		paddle.draw(shape);
 		shape.end();
 	}
+
+	public void checkCollision(Paddle paddle, Ball ball) {
+        if(collidesWith(paddle, ball)){
+            ball.color = Color.GREEN;
+        }
+        else{
+            ball.color = Color.WHITE;
+        }
+    }
+
+    private boolean collidesWith(Paddle paddle, Ball ball) {
+
+		boolean a = ball.x + ball.radius >= paddle.x;
+		boolean b = ball.x - ball.radius <= paddle.x + paddle.width;
+		boolean c = ball.y + ball.radius >= paddle.y;
+		boolean d = ball.y - ball.radius <= paddle.y + paddle.height;
+
+		return a && b && c && d;
+
+    }
 }
