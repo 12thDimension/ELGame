@@ -12,7 +12,7 @@ public class ELGame extends ApplicationAdapter {
 	ArrayList<Ball> balls = new ArrayList<>();
 	Paddle paddle = new Paddle(0,20,120, 10);
 	Random r = new Random();
-	
+	ArrayList<Block> blockArrayList;
 
 	
 
@@ -22,24 +22,33 @@ public class ELGame extends ApplicationAdapter {
 		for (int i = 0; i < 1; i++) {
 			balls.add(new Ball(50,
 					50,
-					40, 5, 5));
+					10, 2, 2));
 		}
+		blockArrayList = new BlockArray(20, 20, 20, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()).getBlocks();
 	}
 
 	@Override
 	public void render() {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 
-		BlockArray blockArray = new BlockArray(4, 5, 20, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		for (Rectangle rectangle : blockArray.getBlocks()){
-			rectangle.draw(shape);
-
+		ArrayList<Block> blocksToDel = new ArrayList<>();
+		for (Block block : blockArrayList){
+			if(block.isDestroyed()){
+				blocksToDel.add(block);
+			}
+			block.draw(shape);
 		}
+		blockArrayList.removeAll(blocksToDel);
 
 		for (Ball ball : balls) {
 			checkCollision(paddle, ball);
+
+			for (Block block : blockArrayList){
+				block.setDestroyed(collidesWith(block, ball));
+				checkCollision(block, ball);
+			}
+
 			ball.update();
 			ball.draw(shape);
 		}
