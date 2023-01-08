@@ -12,6 +12,7 @@ public class ELGame extends ApplicationAdapter {
 	ArrayList<Ball> balls = new ArrayList<>();
 	Paddle paddle = new Paddle(0,20,120, 10);
 	Random r = new Random();
+	
 
 	
 
@@ -30,6 +31,12 @@ public class ELGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
+
+		BlockArray blockArray = new BlockArray(20, 20, 20, Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
+		for (Rectangle rectangle : blockArray.getBlocks()){
+			rectangle.draw(shape);
+
+		}
 
 		for (Ball ball : balls) {
 			checkCollision(paddle, ball);
