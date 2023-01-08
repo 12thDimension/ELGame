@@ -9,8 +9,8 @@ public class BlockArray {
         int blockWidth = screenWidth / columns;
 
         for (int i = 1; i <= rows; i++) {
-            for (int j = 1; j <= columns; j++) {
-                blocks.add(new Rectangle(j * blockWidth, screenHeight - rows * i, blockWidth - 5, rowHeight - 5));
+            for (int j = 0; j < columns; j++) {
+                blocks.add(new Rectangle(j * blockWidth, screenHeight - rowHeight * i, blockWidth - 5, rowHeight - 5));
             }
         }
     }

@@ -32,7 +32,7 @@ public class ELGame extends ApplicationAdapter {
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 
-		BlockArray blockArray = new BlockArray(20, 20, 20, Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
+		BlockArray blockArray = new BlockArray(4, 5, 20, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		for (Rectangle rectangle : blockArray.getBlocks()){
 			rectangle.draw(shape);
 
