@@ -4,14 +4,13 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class ELGame extends ApplicationAdapter {
 	ShapeRenderer shape;
 	ArrayList<Ball> balls = new ArrayList<>();
-	Paddle paddle = new Paddle(120);
+	Paddle paddle = new Paddle(0,20,120, 10);
 	Random r = new Random();
 
 	
@@ -41,8 +40,8 @@ public class ELGame extends ApplicationAdapter {
 		shape.end();
 	}
 
-	public void checkCollision(Paddle paddle, Ball ball) {
-		if (collidesWith(paddle, ball)) {
+	public void checkCollision(Rectangle rectangle, Ball ball) {
+		if (collidesWith(rectangle, ball)) {
 			if (Boolean.FALSE.equals(ball.getCollision())) {
 				ball.setYSpeed(-ball.getYSpeed());
 				ball.setCollision(true);
@@ -52,12 +51,12 @@ public class ELGame extends ApplicationAdapter {
 		}
 	}
 
-	private boolean collidesWith(Paddle paddle, Ball ball) {
+	private boolean collidesWith(Rectangle rectangle, Ball ball) {
 
-		boolean a = ball.getX() + ball.getRadius() >= paddle.getX();
-		boolean b = ball.getX() - ball.getRadius() <= paddle.getX() + paddle.getWidth();
-		boolean c = ball.getY() + ball.getRadius() >= paddle.getY();
-		boolean d = ball.getY() - ball.getRadius() <= paddle.getY() + paddle.getHeight();
+		boolean a = ball.getX() + ball.getRadius() >= rectangle.getX();
+		boolean b = ball.getX() - ball.getRadius() <= rectangle.getX() + rectangle.getWidth();
+		boolean c = ball.getY() + ball.getRadius() >= rectangle.getY();
+		boolean d = ball.getY() - ball.getRadius() <= rectangle.getY() + rectangle.getHeight();
 
 		return a && b && c && d;
 
