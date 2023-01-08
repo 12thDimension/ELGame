@@ -13,4 +13,3 @@ public class DesktopLauncher {
 		new Lwjgl3Application(new ELGame(), config);
 	}
 }
-//this is a robbery
